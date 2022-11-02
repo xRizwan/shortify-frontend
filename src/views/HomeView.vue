@@ -7,8 +7,8 @@
     <section class="column" v-show="main.showurl">
       <p class="descText r10 t20">Here's the shortened URL!</p>
       <div class="t20 row">
-        <div class="r10 short">{{main.shorturl}}</div>
-        <Button text="Copy!" @on-click="handleClick()" />
+        <div ref="container" class="r10 short">{{main.shorturl}}</div>
+        <Button text="Copy!" @on-click="copyUrl" />
       </div>
     </section>
   </main>
@@ -20,12 +20,14 @@ import Button from '../components/Button.vue'
 import { useMainStore } from '../stores/main'
 import { useToast } from 'vue-toastification'
 import validURL from 'valid-url'
+import useClipboard from 'vue-clipboard3'
 
 export default {
   setup() {
     const main = useMainStore()
     const toast = useToast();
-    return { main, toast }
+    const { toClipboard } = useClipboard();
+    return { main, toast, toClipboard }
   },
   name: 'HomeView',
   components: {Input, Button},
@@ -37,6 +39,10 @@ export default {
       } else {
         this.toast.error("Invalid URL.")
       }
+    },
+    async copyUrl() {
+      this.toClipboard(this.main.shorturl)
+      this.toast.success("Copied to Clipboard!")
     }
   },
 }
