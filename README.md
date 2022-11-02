@@ -1,4 +1,4 @@
-# shortify-frontend
+## shortify-frontend - [LIVE - WIP](https://shortify-frontend.vercel.app/)
 Small application that can be used to shorten urls - [Backend](https://github.com/xRizwan/shortify-api)
 
 
