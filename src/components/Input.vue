@@ -1,5 +1,5 @@
 <template>
-  <input type="text" :value="modelValue" @input="handleInput($event)" :placeholder="placeholder">
+  <input type="text" v-bind="$attrs" :value="modelValue" @input="handleInput($event)" :placeholder="placeholder">
 </template>
 
 <script lang="ts">

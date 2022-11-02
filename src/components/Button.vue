@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" v-on:click="$emit('on-click')">{{ text }}</button>
+  <button class="btn" v-bind="$attrs" v-on:click="$emit('on-click')">{{ text }}</button>
 </template>
 
 <script lang="ts">
@@ -15,10 +15,11 @@ export default {
 <style scoped>
 
 .btn {
-  border: 1px solid rgb(255, 165, 30);
   border-radius: 5px;
   background: blanchedalmond;
+  border: 1px solid rgb(255, 165, 30);
   box-shadow: 0px 0px 10px rgb(255, 165, 30);
+  text-shadow: 0px 0px 5px rgb(255, 165, 30);
 }
 
 .btn:active {
