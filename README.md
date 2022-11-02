@@ -1,5 +1,5 @@
-# shortify frontend
-Small application that can be used to shorten urls.
+# shortify-frontend
+Small application that can be used to shorten urls. [Backend](https://github.com/xRizwan/shortify-api)
 
 
 
