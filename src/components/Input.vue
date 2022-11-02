@@ -31,7 +31,7 @@ input {
   width: 250px;
   height: 38px;
   border-radius: 5px;
-  border: 1px solid rgb(255, 165, 30);
-  text-shadow: 0px 0px 5px rgb(255, 165, 30);
+  border: 1px solid var(--m-color);
+  text-shadow: 0px 0px 5px var(--m-color);
 }
 </style>

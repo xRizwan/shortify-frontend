@@ -17,9 +17,9 @@ export default {
 .btn {
   border-radius: 5px;
   background: blanchedalmond;
-  border: 1px solid rgb(255, 165, 30);
-  box-shadow: 0px 0px 10px rgb(255, 165, 30);
-  text-shadow: 0px 0px 5px rgb(255, 165, 30);
+  border: 1px solid var(--m-color);
+  box-shadow: 0px 0px 10px var(--m-color);
+  text-shadow: 0px 0px 5px var(--m-color);
 }
 
 .btn:active {
@@ -27,6 +27,6 @@ export default {
   transform: scale(0.96);
 }
 .btn:hover {
-  box-shadow: 0px 0px 15px rgb(255, 165, 30);;
+  box-shadow: 0px 0px 15px var(--m-color);;
 }
 </style>

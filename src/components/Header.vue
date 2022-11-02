@@ -7,10 +7,10 @@
       <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="130" height="80" />
     </router-link>
     <div class="nav">
-      <router-link to="/register">
+      <router-link class="link" to="/register">
         <div class="right shadow">Signup</div>
       </router-link>
-      <router-link to="/register">
+      <router-link class="link" to="/register">
         <div class="right shadow">Login</div>
       </router-link>
     </div>
@@ -38,10 +38,10 @@ export default {
 }
 
 .shadow {
-  text-shadow: 0px 0px 5px rgb(255, 165, 30);
+  text-shadow: 0px 0px 5px var(--m-color);
 }
 .shadow:hover {
-  text-shadow: 0px 0px 5px rgb(161, 96, 0);
+  text-shadow: 0px 0px 5px var(--m-color-hover);
 }
 .left {
   margin-left: 10px;
@@ -49,5 +49,9 @@ export default {
 
 .right {
   margin-right: 10px;
+}
+
+.link {
+  text-decoration: none;
 }
 </style>
