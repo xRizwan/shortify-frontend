@@ -24,13 +24,9 @@ export const useMainStore = defineStore("main", {
       });
 
       if (response.status === 200) {
-        console.log(response.status);
-
         const data = (await response.json()) as any;
         this.$state.long = data?.long;
         this.$state.short = data?.short;
-
-        console.log(data);
       } else {
         toast.error("Something went wrong, please try again later.");
       }
