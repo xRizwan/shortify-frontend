@@ -1,5 +1,5 @@
 # shortify frontend
-Small application that lets can be used to shorten urls.
+Small application that can be used to shorten urls.
 
 
 
