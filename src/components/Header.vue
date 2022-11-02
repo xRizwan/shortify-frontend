@@ -54,4 +54,7 @@ export default {
 .link {
   text-decoration: none;
 }
+.link:visited{
+  color: #2c3e50;
+}
 </style>
