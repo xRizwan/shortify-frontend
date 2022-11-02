@@ -30,10 +30,12 @@ export default {
 }
 
 .nav-item-left {
-  margin-left: 10px
+  margin-left: 10px;
+  text-shadow: 0px 0px 5px rgb(255 165 30);
 }
 
 .nav-item-right {
-  margin-right: 10px
+  margin-right: 10px;
+  text-shadow: 0px 0px 5px rgb(255 165 30);
 }
 </style>
