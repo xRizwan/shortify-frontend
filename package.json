@@ -1,7 +1,6 @@
 {
   "name": "shortify",
   "version": "0.0.0",
-  "proxy": "127.0.0.1:8000",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
