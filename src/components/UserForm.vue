@@ -2,7 +2,7 @@
   <form class="column center" @submit="handleClick">
     <div class="heading">{{heading}}</div>
     <Input v-model="username" placeholder="Enter Username"/>
-    <Input v-model="password" placeholder="Enter Password"/>
+    <Input v-model="password" type="password" autocomplete placeholder="Enter Password"/>
     <Button text="Sign Up!" class="btn"/>
   </form>
 </template>
