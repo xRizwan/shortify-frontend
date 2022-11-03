@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
-export const API_BASE = import.meta.env.VITE_API_BASE;
+import { API_BASE, makeUrl } from "@/helper";
 
 const toast = useToast();
 
@@ -10,7 +10,7 @@ export const useMainStore = defineStore("main", {
     long: "",
   }),
   getters: {
-    shorturl: (state) => `${API_BASE}${state.short}`,
+    shorturl: (state) => makeUrl(state.short),
     showurl: (state) => (state.short ? true : false),
   },
   actions: {

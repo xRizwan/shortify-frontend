@@ -3,7 +3,7 @@
     <div class="heading">{{heading}}</div>
     <Input v-model="username" placeholder="Enter Username"/>
     <Input v-model="password" type="password" autocomplete placeholder="Enter Password"/>
-    <Button text="Sign Up!" class="btn"/>
+    <Button :text="button" class="btn"/>
   </form>
 </template>
   
@@ -15,7 +15,8 @@
     name: 'RegisterView',
     props: {
       handleSubmit: {type: Function, default: (username: string, password: string) => null},
-      heading: {type: String, default: "Form"}
+      heading: {type: String, default: "Form"},
+      button: {type: String, default: "Submit"},
     },
     data(){
       return {

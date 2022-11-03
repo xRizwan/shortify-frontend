@@ -1,6 +1,6 @@
 <template>
   <main>
-    <UserForm heading="Register" :handleSubmit="handleClick" />
+    <UserForm heading="Sign Up!" button="Register" :handleSubmit="handleClick" />
   </main>
 </template>
 

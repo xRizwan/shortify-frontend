@@ -1,18 +1,53 @@
 <template>
   <h2 class="center heading">Shortened URLs</h2>
   <main class="container">
-    <div class="row">
-      <div class="short">asdasdasdasdasfaklsdjf;lkasjdflkashdfkadfjalskdfhajslkdhfalksdhfkjalsdhfkjahsdf</div>
-      <Button text="Copy!" class="btn"/>
+    <div class="row" :hidden="urls.length === 0" v-bind:key="url.id + String(index)" v-for="(url, index) in allUrls">
+      <div class="short">{{url.short}}</div>
+      <Button text="Copy!" class="btn" @on-click="copy(url.short)"/>
     </div>
+    <div class="row" v-show="urls.length === 0">No URLs</div>
   </main>
 </template>
 
 <script lang="ts">
 import Button from '..//components/Button.vue';
+import { useUserStore } from '../stores/user';
+import { API_BASE, makeUrl } from '../helper';
+import { useToast } from 'vue-toastification';
+import useClipboard from 'vue-clipboard3'
+
 export default {
+  setup(){
+    const toast = useToast();
+    const user = useUserStore() 
+    const { toClipboard } = useClipboard();
+    return { toast, user, toClipboard }
+  },
   name: 'UrlsView',
-  components: {Button}
+  components: {Button},
+  data(){
+    return {
+      urls: [],
+    }
+  },
+  computed: {
+    allUrls() {
+      return this.urls.map((url: any) => ({...url, short: (makeUrl(url.short))}))
+    }
+  },
+  methods: {
+    copy(short: string) {
+      this.toClipboard(short)
+      this.toast.success('Copied to clipboard!')
+    }
+  },
+  async mounted() {
+    const headers = {"authorization": "Bearer " + this.user.token}
+    const response = await fetch(`${API_BASE}api/shortify`, {method: "GET", headers: headers})
+    const data = await response.json()
+    console.log(data)
+    this.urls = data
+  },
 }
 </script>
 

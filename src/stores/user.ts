@@ -1,6 +1,6 @@
+import { API_BASE } from "@/helper";
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
-const API_BASE = import.meta.env.VITE_API_BASE;
 const toast = useToast();
 
 const TOKEN_KEY = "user@token";
