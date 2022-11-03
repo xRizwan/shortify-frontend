@@ -1,6 +1,6 @@
 <template>
   <main>
-    <UserForm heading="Register" :handleSubmit="handleClick" />
+    <UserForm heading="Login" :handleSubmit="handleClick" />
   </main>
 </template>
 
@@ -16,11 +16,11 @@ export default {
 
     return {user, toast}
   },
-  name: 'RegisterView',
+  name: 'LoginView',
   components: {UserForm},
   methods: {
     async handleClick(user: any){
-      const response = await this.user.signup(user)
+      const response = await this.user.login(user)
       if (response)
         this.$router.push("/")
     },

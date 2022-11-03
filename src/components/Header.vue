@@ -10,7 +10,7 @@
       <router-link class="link" to="/register">
         <div class="right shadow">Signup</div>
       </router-link>
-      <router-link class="link" to="/register">
+      <router-link class="link" to="/login">
         <div class="right shadow">Login</div>
       </router-link>
     </div>
