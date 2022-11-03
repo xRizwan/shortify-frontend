@@ -16,7 +16,7 @@
       <router-link class="link" to="/all">
         <div :hidden="user.token === ''" class="right shadow">My Urls</div>
       </router-link>
-      <div :hidden="user.token === ''" class="right shadow" @click="logOut">LogOut</div>
+      <div :hidden="user.token === ''" class="right shadow pointer" @click="logOut">LogOut</div>
     </div>
   </header>
 </template>
@@ -77,6 +77,9 @@ export default {
 }
 .link:visited{
   color: #2c3e50;
+}
+.pointer {
+  cursor: pointer
 }
 
 @media screen and (max-width: 400px) {

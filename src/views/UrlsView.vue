@@ -1,7 +1,7 @@
 <template>
   <h2 class="center heading">Shortened URLs</h2>
   <main class="container">
-    <div class="row" :hidden="urls.length === 0" v-bind:key="url.id + String(index)" v-for="(url, index) in allUrls">
+    <div class="row" :hidden="urls.length === 0" v-bind:key="String(url.id) + String(index)" v-for="(url, index) in allUrls">
       <div class="short">
         <div>Short: &nbsp;&nbsp;&nbsp;{{url.short}}</div>
         <div>Original: {{url.long}}</div>
@@ -37,6 +37,9 @@ export default {
   computed: {
     allUrls() {
       return this.urls.map((url: Url) => ({...url, short: (makeUrl(url.short))}))
+    },
+    token(){
+      return this.user.token
     }
   },
   methods: {
@@ -51,6 +54,11 @@ export default {
     const data = await response.json()
     this.urls = data
   },
+  watch: {
+    token(){
+      if (!this.token) this.$router.push('/')
+    }
+  }
 }
 </script>
 

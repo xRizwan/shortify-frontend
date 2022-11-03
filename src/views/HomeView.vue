@@ -59,7 +59,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 120px;
 }
 input {
   margin-right: 10px;
