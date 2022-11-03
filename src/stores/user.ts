@@ -1,14 +1,10 @@
-import { API_BASE } from "@/helper";
+import { API_BASE, successToastOptions } from "../helper";
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
+import type { User } from "../typing";
 const toast = useToast();
 
 const TOKEN_KEY = "user@token";
-
-type User = {
-  username: string;
-  password: string;
-};
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -39,7 +35,7 @@ export const useUserStore = defineStore("user", {
 
       localStorage.setItem(TOKEN_KEY, data.access_token);
 
-      toast.success("Logged in!");
+      toast.success("Logged in!", successToastOptions);
       return true;
     },
     async signup(body: User): Promise<Boolean> {
@@ -56,7 +52,7 @@ export const useUserStore = defineStore("user", {
         return false;
       }
 
-      toast.success("User created successfully.");
+      toast.success("User created successfully.", successToastOptions);
       return true;
     },
     logout() {

@@ -22,6 +22,7 @@ import { useUserStore } from '../stores/user'
 import { useToast } from 'vue-toastification'
 import validURL from 'valid-url'
 import useClipboard from 'vue-clipboard3'
+import { successToastOptions } from '../helper'
 
 export default {
   setup() {
@@ -44,7 +45,7 @@ export default {
     },
     async copyUrl() {
       this.toClipboard(this.main.shorturl)
-      this.toast.success("Copied to Clipboard!")
+      this.toast.success("Copied to Clipboard!", successToastOptions)
     }
   },
 }

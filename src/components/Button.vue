@@ -6,7 +6,7 @@
 export default {
   name: 'Button',
   props: {
-    text: String,
+    text: {type: String, default: "Submit", required: false},
   },
   emits: ['on-click']
 }

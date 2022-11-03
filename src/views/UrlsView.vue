@@ -12,9 +12,10 @@
 <script lang="ts">
 import Button from '..//components/Button.vue';
 import { useUserStore } from '../stores/user';
-import { API_BASE, makeUrl } from '../helper';
+import { API_BASE, makeUrl, successToastOptions } from '../helper';
 import { useToast } from 'vue-toastification';
 import useClipboard from 'vue-clipboard3'
+import type { Url } from '../typing'
 
 export default {
   setup(){
@@ -32,20 +33,19 @@ export default {
   },
   computed: {
     allUrls() {
-      return this.urls.map((url: any) => ({...url, short: (makeUrl(url.short))}))
+      return this.urls.map((url: Url) => ({...url, short: (makeUrl(url.short))}))
     }
   },
   methods: {
     copy(short: string) {
       this.toClipboard(short)
-      this.toast.success('Copied to clipboard!')
+      this.toast.success('Copied to clipboard!', successToastOptions)
     }
   },
   async mounted() {
     const headers = {"authorization": "Bearer " + this.user.token}
     const response = await fetch(`${API_BASE}api/shortify`, {method: "GET", headers: headers})
     const data = await response.json()
-    console.log(data)
     this.urls = data
   },
 }

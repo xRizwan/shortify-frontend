@@ -31,7 +31,7 @@ export const useMainStore = defineStore("main", {
 
       if (response.status === 200) {
         const data = (await response.json()) as any;
-        this.$state.long = data?.long;
+        this.$state.long = "";
         this.$state.short = data?.short;
       } else {
         toast.error("Something went wrong, please try again later.");

@@ -8,6 +8,7 @@
 import UserForm from '../components/UserForm.vue';
 import { useUserStore } from '../stores/user';
 import { useToast } from 'vue-toastification';
+import type { User } from '../typing';
 
 export default {
   setup(){
@@ -19,7 +20,7 @@ export default {
   name: 'LoginView',
   components: {UserForm},
   methods: {
-    async handleClick(user: any){
+    async handleClick(user: User){
       const response = await this.user.login(user)
       if (response)
         this.$router.push("/")

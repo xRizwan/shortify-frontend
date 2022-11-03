@@ -8,36 +8,41 @@
 </template>
   
 <script lang="ts">
-  import Input from '../components/Input.vue';
-  import Button from '../components/Button.vue';
+import Input from '../components/Input.vue';
+import Button from '../components/Button.vue';
+import type { User } from '../typing';
 
-  export default {
-    name: 'RegisterView',
-    props: {
-      handleSubmit: {type: Function, default: (username: string, password: string) => null},
-      heading: {type: String, default: "Form"},
-      button: {type: String, default: "Submit"},
-    },
-    data(){
-      return {
-        username: "",
-        password: "",
-      }
-    },
-    components: {Input, Button},
-    methods: {
-      async handleClick(e: any){
-        e.preventDefault()
-  
-        const user = {
-          username: this.username,
-          password: this.password
-        }
-        this.handleSubmit(user)
-      },
+export default {
+  name: 'RegisterView',
+  props: {
+    handleSubmit: {type: Function, default: () => null},
+    heading: {type: String, default: "Form"},
+    button: {type: String, default: "Submit"},
+  },
+  data(){
+    return {
+      username: "",
+      password: "",
     }
-  }
-  </script>
+  },
+  components: {Input, Button},
+  methods: {
+    async handleClick(e: Event){
+      e.preventDefault()
+
+      const user: User = {
+        username: this.username,
+        password: this.password
+      }
+      this.handleSubmit(user)
+    },
+  },
+  mounted() {
+    this.username = "";
+    this.password = "";
+  },
+}
+</script>
   
 <style scoped>
   input {

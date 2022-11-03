@@ -18,8 +18,8 @@ export default {
     }
   },
   methods: {
-    handleInput(e: any){
-      this.$emit('update:modelValue', e.target.value)
+    handleInput(e: Event){
+      this.$emit('update:modelValue', (e?.target as HTMLInputElement).value)
     }
   }
 }
