@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="nav">
+    <div class="nav big">
       <div class="left shadow">Shorten urls!</div>
     </div>
     <router-link to="/">
@@ -12,6 +12,9 @@
       </router-link>
       <router-link class="link" to="/login">
         <div :hidden="!!user.token" class="right shadow">Login</div>
+      </router-link>
+      <router-link class="link" to="/all">
+        <div :hidden="user.token === ''" class="right shadow">My Urls</div>
       </router-link>
       <div :hidden="user.token === ''" class="right shadow" @click="logOut">LogOut</div>
     </div>
@@ -42,6 +45,7 @@ export default {
   display: flex;
   justify-content: space-between;
   background-color: aliceblue;
+  box-shadow: 0px 0px 5px var(--m-color);
 }
 
 .nav {
@@ -73,5 +77,16 @@ export default {
 }
 .link:visited{
   color: #2c3e50;
+}
+
+@media screen and (max-width: 400px) {
+  .big {
+    display: none;
+  }
+  .logo {
+    margin-left: 10px;
+    width: 80px;
+    height: 50px;
+  }
 }
 </style>
