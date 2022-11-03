@@ -6,8 +6,8 @@
     </section>
     <section class="column" v-show="main.showurl">
       <p class="r10 t20 center">Here's the shortened URL!</p>
-      <div class="t20 row">
-        <div class="r10 short">{{main.shorturl}}</div>
+      <div class="t20 row container">
+        <div class="r10 container__short">{{main.shorturl}}</div>
         <Button text="Copy!" @on-click="copyUrl" />
       </div>
     </section>
@@ -65,7 +65,6 @@ input {
   margin-right: 10px;
 }
 
-
 .r10 {
   margin-right: 10px;
 }
@@ -82,8 +81,12 @@ input {
 .column {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
-.short {
+.container {
+  justify-content: center;
+}
+.container__short {
   font-size: 12px;
   background: white;
 
@@ -100,7 +103,13 @@ input {
   border: 1px solid var(--m-color);
   text-shadow: 0px 0px 5px var(--m-color);
 }
-.short::-webkit-scrollbar {
+.container__short::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 400px) {
+  input {
+    width: auto;
+  }
 }
 </style>

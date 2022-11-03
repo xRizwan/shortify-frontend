@@ -2,10 +2,13 @@
   <h2 class="center heading">Shortened URLs</h2>
   <main class="container">
     <div class="row" :hidden="urls.length === 0" v-bind:key="url.id + String(index)" v-for="(url, index) in allUrls">
-      <div class="short">{{url.short}}</div>
+      <div class="short">
+        <div>Short: &nbsp;&nbsp;&nbsp;{{url.short}}</div>
+        <div>Original: {{url.long}}</div>
+      </div>
       <Button text="Copy!" class="btn" @on-click="copy(url.short)"/>
     </div>
-    <div class="row" v-show="urls.length === 0">No URLs</div>
+    <div class="row" v-show="urls.length === 0">No Shortened URLs</div>
   </main>
 </template>
 
@@ -128,6 +131,6 @@ export default {
   width: 80px;
   height: 30px;
   margin-left: 10px;
-  margin-top: 5px;
+  align-self: center;
 }
 </style>

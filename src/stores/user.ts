@@ -47,6 +47,11 @@ export const useUserStore = defineStore("user", {
         body: JSON.stringify(body),
       });
 
+      if (response.status === 400) {
+        toast.error("Username already exists");
+        return false;
+      }
+
       if (response.status !== 200) {
         toast.error("Something went wrong, please try again later.");
         return false;
