@@ -37,5 +37,9 @@ export const useMainStore = defineStore("main", {
         toast.error("Something went wrong, please try again later.");
       }
     },
+    reset() {
+      this.short = "";
+      this.long = "";
+    },
   },
 });

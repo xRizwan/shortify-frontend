@@ -48,6 +48,9 @@ export default {
       this.toast.success("Copied to Clipboard!", successToastOptions)
     }
   },
+  mounted(){
+    this.main.reset()
+  },
 }
 </script>
 
