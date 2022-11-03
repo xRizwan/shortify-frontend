@@ -6,22 +6,34 @@
     <router-link to="/">
       <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="130" height="80" />
     </router-link>
-    <div class="nav">
+    <div class="nav end">
       <router-link class="link" to="/register">
-        <div class="right shadow">Signup</div>
+        <div :hidden="!!user.token" class="right shadow">Signup</div>
       </router-link>
       <router-link class="link" to="/login">
-        <div class="right shadow">Login</div>
+        <div :hidden="!!user.token" class="right shadow">Login</div>
       </router-link>
+      <div :hidden="user.token === ''" class="right shadow" @click="logOut">LogOut</div>
     </div>
   </header>
 </template>
 
 <script lang="ts">
 import { RouterLink } from 'vue-router';
+import { useUserStore } from '../stores/user';
+
 export default {
+  setup(){
+    const user = useUserStore()
+    return {user}
+  },
   name: 'Header',
-  components: {RouterLink}
+  components: {RouterLink},
+  methods: {
+    logOut() {
+      this.user.logout()
+    },
+  }
 }
 </script>
 
@@ -35,6 +47,11 @@ export default {
 .nav {
   align-self: center;
   display: flex;
+  width: 200px;
+}
+
+.end {
+  justify-content: end;
 }
 
 .shadow {

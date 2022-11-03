@@ -18,12 +18,13 @@ export const useUserStore = defineStore("user", {
   getters: {},
   actions: {
     async login(body: User): Promise<Boolean> {
+      const form = new FormData();
+      form.append("username", body.username);
+      form.append("password", body.password);
+
       const response = await fetch(`${API_BASE}login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
+        body: form,
       });
 
       if (response.status !== 200) {
@@ -34,13 +35,15 @@ export const useUserStore = defineStore("user", {
       const data = await response.json();
 
       this.username = body.username;
-      this.token = data.access;
+      this.token = data.access_token;
 
-      toast.success("Loggin in!");
+      localStorage.setItem(TOKEN_KEY, data.access_token);
+
+      toast.success("Logged in!");
       return true;
     },
     async signup(body: User): Promise<Boolean> {
-      const response = await fetch(`${API_BASE}users`, {
+      const response = await fetch(`${API_BASE}api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,13 +56,12 @@ export const useUserStore = defineStore("user", {
         return false;
       }
 
-      const data = await response.json();
-
-      this.username = body.username;
-      this.token = data.access;
-
       toast.success("User created successfully.");
       return true;
+    },
+    logout() {
+      localStorage.removeItem(TOKEN_KEY);
+      this.token = "";
     },
   },
 });

@@ -14,12 +14,18 @@ export const useMainStore = defineStore("main", {
     showurl: (state) => (state.short ? true : false),
   },
   actions: {
-    async postURL() {
+    async postURL(token: string | null) {
+      const headers: HeadersInit = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers["authorization"] = "Bearer " + token;
+      }
+
       const response = await fetch(`${API_BASE}api/shortify`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify({ long: this.$state.long }),
       });
 

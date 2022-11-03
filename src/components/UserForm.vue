@@ -32,9 +32,6 @@
           username: this.username,
           password: this.password
         }
-
-        console.log('here')
-        
         this.handleSubmit(user)
       },
     }

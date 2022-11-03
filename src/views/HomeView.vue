@@ -18,6 +18,7 @@
 import Input from '../components/Input.vue'
 import Button from '../components/Button.vue'
 import { useMainStore } from '../stores/main'
+import { useUserStore } from '../stores/user'
 import { useToast } from 'vue-toastification'
 import validURL from 'valid-url'
 import useClipboard from 'vue-clipboard3'
@@ -26,8 +27,9 @@ export default {
   setup() {
     const main = useMainStore()
     const toast = useToast();
+    const user = useUserStore() 
     const { toClipboard } = useClipboard();
-    return { main, toast, toClipboard }
+    return { main, toast, user, toClipboard }
   },
   name: 'HomeView',
   components: {Input, Button},
@@ -35,7 +37,7 @@ export default {
     async handleClick() {
       const valid = validURL.isUri(this.main.long)
       if (valid) {
-        this.main.postURL()
+        this.main.postURL(this.user.token)
       } else {
         this.toast.error("Invalid URL.")
       }

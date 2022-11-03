@@ -22,7 +22,7 @@ export default {
     async handleClick(user: any){
       const response = await this.user.signup(user)
       if (response)
-        this.$router.push("/")
+        this.$router.push("/login")
     },
   }
 }
