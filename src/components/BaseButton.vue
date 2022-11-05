@@ -21,6 +21,7 @@ export default {
   border: 1px solid var(--m-color);
   box-shadow: 0px 0px 10px var(--m-color);
   text-shadow: 0px 0px 5px var(--m-color);
+  cursor: pointer;
 }
 
 .btn:active {
