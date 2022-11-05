@@ -3,7 +3,7 @@
 const TEST_URL = "https://www.google.com";
 
 describe("Url Shortening Test", () => {
-  it("Shortens urls properly", () => {
+  it("Shortens url properly", () => {
     cy.visit("/");
     cy.contains("Shorten urls!");
 
@@ -14,7 +14,9 @@ describe("Url Shortening Test", () => {
 
     cy.get("[data-cy=short-url]").should("be.visible");
     cy.get("[data-cy=short-url]").should("not.be.empty");
+  });
 
+  it("Copies short url properly", () => {
     cy.window()
       .its("navigator.permissions")
       .invoke("query", { name: "clipboard-read" })
