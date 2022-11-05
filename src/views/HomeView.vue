@@ -21,7 +21,6 @@ import { useMainStore } from '../stores/main'
 import { useUserStore } from '../stores/user'
 import { useToast } from 'vue-toastification'
 import validURL from 'valid-url'
-import useClipboard from 'vue-clipboard3'
 import { successToastOptions } from '../helper'
 
 export default {
@@ -29,8 +28,7 @@ export default {
     const main = useMainStore()
     const toast = useToast();
     const user = useUserStore() 
-    const { toClipboard } = useClipboard();
-    return { main, toast, user, toClipboard }
+    return { main, toast, user }
   },
   name: 'HomeView',
   components: {Input, Button},
@@ -44,7 +42,7 @@ export default {
       }
     },
     async copyUrl() {
-      this.toClipboard(this.main.shorturl)
+      await navigator.clipboard.writeText(this.main.shorturl)
       this.toast.success("Copied to Clipboard!", successToastOptions)
     }
   },

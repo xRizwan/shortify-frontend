@@ -17,15 +17,13 @@ import Button from '..//components/Button.vue';
 import { useUserStore } from '../stores/user';
 import { API_BASE, makeUrl, successToastOptions } from '../helper';
 import { useToast } from 'vue-toastification';
-import useClipboard from 'vue-clipboard3'
 import type { Url } from '../typing'
 
 export default {
   setup(){
     const toast = useToast();
     const user = useUserStore() 
-    const { toClipboard } = useClipboard();
-    return { toast, user, toClipboard }
+    return { toast, user }
   },
   name: 'UrlsView',
   components: {Button},
@@ -43,8 +41,8 @@ export default {
     }
   },
   methods: {
-    copy(short: string) {
-      this.toClipboard(short)
+    async copy(short: string) {
+      await navigator.clipboard.writeText(short)
       this.toast.success('Copied to clipboard!', successToastOptions)
     }
   },
