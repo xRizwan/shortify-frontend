@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import Header from './components/Header.vue';
+import { RouterView } from "vue-router";
+import NavigationHeader from "./components/NavigationHeader.vue";
 </script>
 
 <template>
-  <Header />
+  <NavigationHeader />
 
   <RouterView />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,65 +1,74 @@
 <template>
-  <h2 class="center heading">Shortened URLs</h2>
-  <main class="container">
-    <div class="row" :hidden="urls.length === 0" v-bind:key="String(url.id) + String(index)" v-for="(url, index) in allUrls">
+  <h2 class="center heading" data-cy="heading">Shortened URLs</h2>
+  <main class="container" data-cy="urls-container">
+    <div
+      class="row"
+      :hidden="urls.length === 0"
+      v-bind:key="String(url.id) + String(index)"
+      v-for="(url, index) in allUrls"
+    >
       <div class="short">
-        <div>Short: &nbsp;&nbsp;&nbsp;{{url.short}}</div>
-        <div>Original: {{url.long}}</div>
+        <div data-cy="short">Short: &nbsp;&nbsp;&nbsp;{{ url.short }}</div>
+        <div data-cy="long">Original: {{ url.long }}</div>
       </div>
-      <Button text="Copy!" class="btn" @on-click="copy(url.short)"/>
+      <BaseButton text="Copy!" class="btn" @on-click="copy(url.short)" />
     </div>
     <div class="row" v-show="urls.length === 0">No Shortened URLs</div>
   </main>
 </template>
 
 <script lang="ts">
-import Button from '..//components/Button.vue';
-import { useUserStore } from '../stores/user';
-import { API_BASE, makeUrl, successToastOptions } from '../helper';
-import { useToast } from 'vue-toastification';
-import useClipboard from 'vue-clipboard3'
-import type { Url } from '../typing'
+import BaseButton from "../components/BaseButton.vue";
+import { useUserStore } from "../stores/user";
+import { API_BASE, makeUrl, successToastOptions } from "../helper";
+import { useToast } from "vue-toastification";
+import type { Url } from "../typing";
 
 export default {
-  setup(){
+  setup() {
     const toast = useToast();
-    const user = useUserStore() 
-    const { toClipboard } = useClipboard();
-    return { toast, user, toClipboard }
+    const user = useUserStore();
+    return { toast, user };
   },
-  name: 'UrlsView',
-  components: {Button},
-  data(){
+  name: "UrlsView",
+  components: { BaseButton },
+  data() {
     return {
       urls: [],
-    }
+    };
   },
   computed: {
     allUrls() {
-      return this.urls.map((url: Url) => ({...url, short: (makeUrl(url.short))}))
+      return this.urls.map((url: Url) => ({
+        ...url,
+        short: makeUrl(url.short),
+      }));
     },
-    token(){
-      return this.user.token
-    }
+    token() {
+      return this.user.token;
+    },
   },
   methods: {
-    copy(short: string) {
-      this.toClipboard(short)
-      this.toast.success('Copied to clipboard!', successToastOptions)
-    }
+    async copy(short: string) {
+      await navigator.clipboard.writeText(short);
+      this.toast.success("Copied to clipboard!", successToastOptions);
+    },
   },
   async mounted() {
-    const headers = {"authorization": "Bearer " + this.user.token}
-    const response = await fetch(`${API_BASE}api/shortify`, {method: "GET", headers: headers})
-    const data = await response.json()
-    this.urls = data
+    const headers = { authorization: "Bearer " + this.user.token };
+    const response = await fetch(`${API_BASE}api/shortify`, {
+      method: "GET",
+      headers: headers,
+    });
+    const data = await response.json();
+    this.urls = data;
   },
   watch: {
-    token(){
-      if (!this.token) this.$router.push('/')
-    }
-  }
-}
+    token() {
+      if (!this.token) this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -67,7 +76,7 @@ export default {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-.container{
+.container {
   max-width: 600px;
   border-radius: 10px;
   margin: 0 auto;
@@ -75,7 +84,7 @@ export default {
   background: aliceblue;
   display: flex;
   flex-direction: column;
-  
+
   box-shadow: 0px 0px 10px var(--m-color);
   font-family: monospace;
   padding: 10px;
@@ -121,12 +130,12 @@ export default {
   width: 320px;
   padding: 10px;
   box-sizing: content-box;
-  
+
   white-space: nowrap;
   overflow-x: scroll;
   -ms-overflow-style: none;
-  scrollbar-width: none; 
-  
+  scrollbar-width: none;
+
   border: 1px solid var(--m-color);
   text-shadow: 0px 0px 5px var(--m-color);
   height: fit-content;

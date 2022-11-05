@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
-import { API_BASE, makeUrl } from "@/helper";
+import { API_BASE, errorToastOptions, makeUrl } from "@/helper";
 
 const toast = useToast();
 
@@ -34,7 +34,10 @@ export const useMainStore = defineStore("main", {
         this.$state.long = "";
         this.$state.short = data?.short;
       } else {
-        toast.error("Something went wrong, please try again later.");
+        toast.error(
+          "Something went wrong, please try again later.",
+          errorToastOptions
+        );
       }
     },
     reset() {

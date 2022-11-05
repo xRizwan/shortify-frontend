@@ -1,4 +1,4 @@
-import { API_BASE, successToastOptions } from "../helper";
+import { API_BASE, errorToastOptions, successToastOptions } from "../helper";
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
 import type { User } from "../typing";
@@ -24,7 +24,7 @@ export const useUserStore = defineStore("user", {
       });
 
       if (response.status !== 200) {
-        toast.error("Failed to login.");
+        toast.error("Failed to login.", errorToastOptions);
         return false;
       }
 
@@ -48,12 +48,15 @@ export const useUserStore = defineStore("user", {
       });
 
       if (response.status === 400) {
-        toast.error("Username already exists");
+        toast.error("Username already exists", errorToastOptions);
         return false;
       }
 
       if (response.status !== 200) {
-        toast.error("Something went wrong, please try again later.");
+        toast.error(
+          "Something went wrong, please try again later.",
+          errorToastOptions
+        );
         return false;
       }
 

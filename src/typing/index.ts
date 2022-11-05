@@ -17,3 +17,7 @@ export type Url = {
 export type SuccessToastOptions = ToastOptions & {
   type?: TYPE.SUCCESS | undefined;
 };
+
+export type ErrorToastOptions = ToastOptions & {
+  type?: TYPE.ERROR | undefined;
+};

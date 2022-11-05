@@ -1,39 +1,38 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
 
-export {}
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(username: string, password: string): Chainable<void>;
+      register(username: string, password: string): Chainable<void>;
+    }
+  }
+}
+
+Cypress.Commands.add("register", (username, password) => {
+  cy.visit("/register");
+  cy.intercept({ method: "POST", url: "**/api/users" }).as("userApi");
+
+  cy.get("[data-cy=username-input]").clear().type(username);
+  cy.get("[data-cy=password-input]").clear().type(password);
+
+  cy.get("[data-cy=submit-button]").click();
+
+  cy.wait("@userApi");
+  cy.get(".successToast").should("contain.text", "User created successfully.");
+});
+
+Cypress.Commands.add("login", (username, password) => {
+  cy.visit("/login");
+  cy.intercept({ method: "POST", url: "**/login" }).as("loginApi");
+
+  cy.get("[data-cy=username-input]").clear().type(username);
+  cy.get("[data-cy=password-input]").clear().type(password);
+
+  cy.get("[data-cy=submit-button]").click();
+
+  cy.wait("@loginApi");
+  cy.get(".successToast").should("contain.text", "Logged in!");
+});
+
+export {};
