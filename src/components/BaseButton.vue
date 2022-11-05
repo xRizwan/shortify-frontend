@@ -1,19 +1,20 @@
 <template>
-  <button class="btn" v-bind="$attrs" v-on:click="$emit('on-click')">{{ text }}</button>
+  <button class="btn" v-bind="$attrs" v-on:click="$emit('on-click')">
+    {{ text }}
+  </button>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'Button',
+  name: "BaseButton",
   props: {
-    text: {type: String, default: "Submit", required: false},
+    text: { type: String, default: "Submit", required: false },
   },
-  emits: ['on-click']
-}
+  emits: ["on-click"],
+};
 </script>
 
 <style scoped>
-
 .btn {
   border-radius: 5px;
   background: blanchedalmond;
@@ -27,6 +28,6 @@ export default {
   transform: scale(0.96);
 }
 .btn:hover {
-  box-shadow: 0px 0px 15px var(--m-color);;
+  box-shadow: 0px 0px 15px var(--m-color);
 }
 </style>

@@ -1,32 +1,35 @@
 <template>
   <main>
-    <UserForm heading="Sign Up!" button="Register" :handleSubmit="handleClick" />
+    <UserForm
+      heading="Sign Up!"
+      button="Register"
+      :handleSubmit="handleClick"
+    />
   </main>
 </template>
 
 <script lang="ts">
-import UserForm from '../components/UserForm.vue';
-import { useUserStore } from '../stores/user';
-import { useToast } from 'vue-toastification';
-import type { User } from '../typing';
+import UserForm from "../components/UserForm.vue";
+import { useUserStore } from "../stores/user";
+import { useToast } from "vue-toastification";
+import type { User } from "../typing";
 
 export default {
-  setup(){
-    const user = useUserStore()
-    const toast = useToast()
+  setup() {
+    const user = useUserStore();
+    const toast = useToast();
 
-    return {user, toast}
+    return { user, toast };
   },
-  name: 'RegisterView',
-  components: {UserForm},
+  name: "RegisterView",
+  components: { UserForm },
   methods: {
-    async handleClick(user: User){
-      const response = await this.user.signup(user)
-      if (response)
-        this.$router.push("/login")
+    async handleClick(user: User) {
+      const response = await this.user.signup(user);
+      if (response) this.$router.push("/login");
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -1,18 +1,18 @@
-import { describe, it, expect, vi, beforeAll, Mock } from "vitest";
+import { describe, it, expect, vi, beforeAll } from "vitest";
 import { createTestingPinia } from "@pinia/testing";
 import { useUserStore } from "@/stores/user";
 import VueRouter from "vue-router";
 
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import Header from "../Header.vue";
+import NavigationHeader from "../NavigationHeader.vue";
 import type { Store } from "pinia";
 
-describe("Header", async () => {
+describe("NavigationHeader", async () => {
   let wrapper: VueWrapper<any>;
   let user: Store;
 
   beforeAll(() => {
-    wrapper = shallowMount(Header, {
+    wrapper = shallowMount(NavigationHeader, {
       global: {
         stubs: { "router-link": { template: "" } },
         plugins: [
