@@ -1,14 +1,14 @@
 import { describe, it, expect, vi, beforeAll, Mock } from "vitest";
 
 import { shallowMount, VueWrapper } from "@vue/test-utils";
-import Button from "../Button.vue";
+import BaseButton from "../BaseButton.vue";
 
-describe("Button", async () => {
+describe("BaseButton", async () => {
   let wrapper: VueWrapper<any>;
   let fn: Mock;
   beforeAll(() => {
     fn = vi.fn();
-    wrapper = shallowMount(Button, {
+    wrapper = shallowMount(BaseButton, {
       props: { text: "This is a button!", "onOn-click": fn },
     });
   });
