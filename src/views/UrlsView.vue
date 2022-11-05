@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import BaseButton from "..//components/BaseButton.vue";
+import BaseButton from "../components/BaseButton.vue";
 import { useUserStore } from "../stores/user";
 import { API_BASE, makeUrl, successToastOptions } from "../helper";
 import { useToast } from "vue-toastification";
