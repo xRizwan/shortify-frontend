@@ -1,14 +1,14 @@
 <template>
   <main>
     <section class="row">
-      <Input v-model="main.long" placeholder="Enter a url"/>
-      <Button text="Shorten!" @on-click="handleClick()" />
+      <Input data-cy="url-input" v-model="main.long" placeholder="Enter a url"/>
+      <Button data-cy="shorten-button" text="Shorten!" @on-click="handleClick()" />
     </section>
     <section class="column" v-show="main.showurl">
       <p class="r10 t20 center">Here's the shortened URL!</p>
       <div class="t20 row container">
-        <div class="r10 container__short">{{main.shorturl}}</div>
-        <Button text="Copy!" @on-click="copyUrl" />
+        <div data-cy="short-url" class="r10 container__short">{{main.shorturl}}</div>
+        <Button data-cy="copy-button" text="Copy!" @on-click="copyUrl" />
       </div>
     </section>
   </main>

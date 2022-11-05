@@ -1,8 +1,8 @@
 <template>
   <form class="column center" @submit="handleClick">
     <div class="heading">{{heading}}</div>
-    <Input v-model="username" placeholder="Enter Username"/>
-    <Input v-model="password" type="password" autocomplete placeholder="Enter Password"/>
+    <Input v-model="username" data-cy="username-input" placeholder="Enter Username"/>
+    <Input v-model="password" data-cy="password-input" type="password" autocomplete placeholder="Enter Password"/>
     <Button :text="button" class="btn"/>
   </form>
 </template>

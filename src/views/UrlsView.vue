@@ -1,10 +1,10 @@
 <template>
-  <h2 class="center heading">Shortened URLs</h2>
-  <main class="container">
+  <h2 class="center heading" data-cy="heading">Shortened URLs</h2>
+  <main class="container" data-cy="urls-container">
     <div class="row" :hidden="urls.length === 0" v-bind:key="String(url.id) + String(index)" v-for="(url, index) in allUrls">
       <div class="short">
-        <div>Short: &nbsp;&nbsp;&nbsp;{{url.short}}</div>
-        <div>Original: {{url.long}}</div>
+        <div data-cy="short">Short: &nbsp;&nbsp;&nbsp;{{url.short}}</div>
+        <div data-cy="long">Original: {{url.long}}</div>
       </div>
       <Button text="Copy!" class="btn" @on-click="copy(url.short)"/>
     </div>

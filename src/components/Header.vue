@@ -7,16 +7,16 @@
       <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="130" height="80" />
     </router-link>
     <div class="nav end">
-      <router-link class="link" to="/register">
+      <router-link data-cy="signup" class="link" to="/register">
         <div :hidden="!!user.token" class="right shadow">Signup</div>
       </router-link>
-      <router-link class="link" to="/login">
+      <router-link data-cy="login" class="link" to="/login">
         <div :hidden="!!user.token" class="right shadow">Login</div>
       </router-link>
-      <router-link class="link" to="/all">
+      <router-link data-cy="all" class="link" to="/all">
         <div :hidden="user.token === ''" class="right shadow">My Urls</div>
       </router-link>
-      <div :hidden="user.token === ''" class="right shadow pointer" @click="logOut">LogOut</div>
+      <div data-cy="logout" :hidden="user.token === ''" class="right shadow pointer" @click="logOut">LogOut</div>
     </div>
   </header>
 </template>
