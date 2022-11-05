@@ -3,7 +3,7 @@
     <div class="heading">{{heading}}</div>
     <Input v-model="username" data-cy="username-input" placeholder="Enter Username"/>
     <Input v-model="password" data-cy="password-input" type="password" autocomplete placeholder="Enter Password"/>
-    <Button :text="button" class="btn"/>
+    <Button data-cy="submit-button" :text="button" class="btn"/>
   </form>
 </template>
   

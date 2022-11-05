@@ -21,7 +21,7 @@ import { useMainStore } from '../stores/main'
 import { useUserStore } from '../stores/user'
 import { useToast } from 'vue-toastification'
 import validURL from 'valid-url'
-import { successToastOptions } from '../helper'
+import { errorToastOptions, successToastOptions } from '../helper'
 
 export default {
   setup() {
@@ -38,7 +38,7 @@ export default {
       if (valid) {
         this.main.postURL(this.user.token)
       } else {
-        this.toast.error("Invalid URL.")
+        this.toast.error("Invalid URL.", errorToastOptions)
       }
     },
     async copyUrl() {

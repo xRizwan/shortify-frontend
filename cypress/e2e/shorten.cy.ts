@@ -5,6 +5,8 @@ const TEST_URL = "https://www.google.com";
 describe("Url Shortening Test", () => {
   it("Shortens url properly", () => {
     cy.visit("/");
+    cy.intercept({ method: "POST", url: "**/api/shortify" }).as("shortenApi");
+
     cy.contains("Shorten urls!");
 
     cy.get("[data-cy=short-url]").should("not.be.visible");
@@ -12,6 +14,7 @@ describe("Url Shortening Test", () => {
     cy.get("[data-cy=url-input]").clear().type(TEST_URL);
     cy.get("[data-cy=shorten-button]").click();
 
+    cy.wait("@shortenApi");
     cy.get("[data-cy=short-url]").should("be.visible");
     cy.get("[data-cy=short-url]").should("not.be.empty");
   });
@@ -26,12 +29,7 @@ describe("Url Shortening Test", () => {
     cy.get("[data-cy=copy-button]").should("be.visible").click();
 
     cy.window()
-      .then(
-        (win) =>
-          new Cypress.Promise((resolve, reject) =>
-            win.navigator.clipboard.readText().then(resolve).catch(reject)
-          )
-      )
+      .invoke("navigator.clipboard.readText")
       .then((val) => {
         cy.get("[data-cy=short-url]").invoke("text").should("equal", val);
       });
