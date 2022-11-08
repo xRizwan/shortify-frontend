@@ -20,7 +20,7 @@
 <script lang="ts">
 import BaseButton from "../components/BaseButton.vue";
 import { useUserStore } from "../stores/user";
-import { API_BASE, makeUrl, successToastOptions } from "../helper";
+import { API_BASE, errorToastOptions, makeUrl, successToastOptions } from "../helper";
 import { useToast } from "vue-toastification";
 import type { Url } from "../typing";
 
@@ -60,6 +60,11 @@ export default {
       method: "GET",
       headers: headers,
     });
+    if (response.status === 403) {
+      this.toast.error("Session Expired, Please login again.", errorToastOptions)
+      this.user.logout();
+      return;
+    }
     const data = await response.json();
     this.urls = data;
   },

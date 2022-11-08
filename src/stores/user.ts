@@ -1,10 +1,13 @@
-import { API_BASE, errorToastOptions, successToastOptions } from "../helper";
+import {
+  API_BASE,
+  errorToastOptions,
+  successToastOptions,
+  TOKEN_KEY,
+} from "../helper";
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
 import type { User } from "../typing";
 const toast = useToast();
-
-const TOKEN_KEY = "user@token";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
