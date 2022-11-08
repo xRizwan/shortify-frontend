@@ -46,7 +46,7 @@ export default {
     async handleClick() {
       const valid = validURL.isUri(this.main.long);
       if (valid) {
-        this.main.postURL(this.user.token);
+        this.main.postURL(this.user.token, this.user.logout);
       } else {
         this.toast.error("Invalid URL.", errorToastOptions);
       }

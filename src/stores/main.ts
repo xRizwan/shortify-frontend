@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
 import { API_BASE, errorToastOptions, makeUrl } from "@/helper";
+import type { Url } from "@/typing";
 
 const toast = useToast();
 
@@ -14,7 +15,7 @@ export const useMainStore = defineStore("main", {
     showurl: (state) => (state.short ? true : false),
   },
   actions: {
-    async postURL(token: string | null) {
+    async postURL(token?: string, tokenExpireCallback?: Function) {
       const headers: HeadersInit = {
         "Content-Type": "application/json",
       };
@@ -30,9 +31,12 @@ export const useMainStore = defineStore("main", {
       });
 
       if (response.status === 200) {
-        const data = (await response.json()) as any;
+        const data = (await response.json()) as Url;
         this.$state.long = "";
-        this.$state.short = data?.short;
+        this.$state.short = data.short;
+      } else if (response.status === 403 && tokenExpireCallback !== undefined) {
+        toast.error("Session expired, Please login again.", errorToastOptions);
+        tokenExpireCallback();
       } else {
         toast.error(
           "Something went wrong, please try again later.",
